@@ -2,17 +2,49 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="./yes_style.css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+        <title>Yay! Happy Valentine's!</title>
     </head> 
     <body>
         <div class="container">
-            <div >
-                <h1 class = "header_text">YAYY!!</h1>
+            <div class="proposal">
+                <h1 class="header_text">Yayy!! I'm so happy! </h1>
             </div>
             <div class="gif_container">
-                <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Cute animated illustration">
+                <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Cute animated celebration">
             </div>
+            <div class="message">
+                <p>Thank you for being my Valentine!</p>
+            </div>
+            <p class="message_text">You mean the absolute world to me, and I can't imagine a life without you. Thank you for always being there for me. </p>
+
         </div>
-       
+        <div class="hearts-container"></div>
+        
+        <script>
+            // Create initial hearts when page loads
+            window.onload = function() {
+                const container = document.querySelector('.hearts-container');
+                setInterval(() => {
+                    createHeart(container);
+                }, 300);
+            }
+
+            function createHeart(container) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animation = `float ${Math.random() * 2 + 3}s linear forwards`;
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        </script>
     </body> 
 </html>

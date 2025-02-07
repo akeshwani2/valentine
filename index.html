@@ -2,33 +2,71 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="./styles.css">
-        
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+        <title>Valentine's Proposal</title>
     </head> 
     <body>
         <div class="container">
-            <div >
-                <h1 class = "header_text">Will you do me the honour of being my valentine?</h1>
+            <div class="proposal">
+                <h1 class="header_text">Will you do me the honour of being my valentine?</h1>
             </div>
             <div class="gif_container">
                 <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
             </div>
-            <div class = "buttons">
-                <button class="btn" id = "yesButton" onclick="nextPage()">Yes definitely!</button>
-                <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No thx</button>
-                <script>
-                    function nextPage() {
-                        window.location.href = "yes.html";
-                    }
-                    
-                    function moveButton() {
-                        var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
-                        var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
-                        document.getElementById('noButton').style.left = `${x}px`;
-                        document.getElementById('noButton').style.top = `${y}px`;
-                    }
-                </script> 
+            <div class="button-container">
+                <button class="yes-btn" onclick="nextPage()">Yes definitely!</button>
+                <button class="no-btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No thx</button>
             </div>
         </div>
-       
+        <div class="hearts-container"></div>
+        
+        <script>
+            function nextPage() {
+                const hearts = document.querySelector('.hearts-container');
+                for (let i = 0; i < 50; i++) {
+                    createHeart(hearts);
+                }
+                setTimeout(() => {
+                    window.location.href = "yes.html";
+                }, 1000);
+            }
+            
+            function moveButton() {
+                const button = document.getElementById('noButton');
+                const currentX = button.offsetLeft;
+                const currentY = button.offsetTop;
+                
+                // Move in smaller increments (50-100 pixels) from current position
+                const moveX = currentX + (Math.random() - 0.9) * 100;
+                const moveY = currentY + (Math.random() - 0.9) * 100;
+                
+                // Ensure button stays within viewport bounds with padding
+                const maxX = window.innerWidth - button.offsetWidth - 20;
+                const maxY = window.innerHeight - button.offsetHeight - 20;
+                
+                const newX = Math.min(Math.max(20, moveX), maxX);
+                const newY = Math.min(Math.max(20, moveY), maxY);
+                
+                button.style.position = 'absolute';
+                button.style.left = `${newX}px`;
+                button.style.top = `${newY}px`;
+            }
+
+            function createHeart(container) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'absolute';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animation = `float ${Math.random() * 2 + 3}s linear forwards`;
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        </script>
     </body> 
 </html>
